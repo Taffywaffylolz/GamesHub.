@@ -126,6 +126,20 @@
       color: #28a745; /* Green color for checkmark */
       margin-right: 10px;
     }
+    .steamtools-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff; /* Blue color for the button */
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 20px; /* Space below the button */
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .steamtools-btn:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
   </style>
 </head>
 <body>
@@ -212,6 +226,9 @@
 
     <!-- Sidebar for Online Games -->
     <div class="sidebar">
+      <!-- SteamTools Button -->
+      <a href="https://steamtools.net/" class="steamtools-btn" target="_blank">Get SteamTools</a>
+
       <h2>Online to Download</h2>
       <ul class="online-games-list" id="onlineGamesList">
         <!-- Online games will be dynamically added here -->
