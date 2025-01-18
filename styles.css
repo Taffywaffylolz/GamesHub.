@@ -10,6 +10,7 @@ body {
   align-items: center;
   min-height: 100vh;
   overflow: hidden;
+  background-image: radial-gradient(circle at 50% 50%, #1a1a1a, #0a0a0a); /* Subtle radial gradient */
 }
 
 .container {
@@ -20,13 +21,51 @@ body {
   background-color: #1a1a1a; /* Slightly lighter black for the container */
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid #333; /* Subtle border */
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(187, 134, 252, 0.1), transparent 70%);
+  animation: rotate 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
   color: #bb86fc; /* Purple accent for headings */
-  text-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
+  text-shadow: 0 0 15px rgba(187, 134, 252, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #bb86fc, transparent);
+  border-radius: 50%;
 }
 
 /* File List Container */
@@ -37,7 +76,19 @@ h1 {
   border: 2px solid #333;
   border-radius: 10px;
   background-color: #222; /* Darker black for the list */
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.file-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(187, 134, 252, 0.05), transparent 70%);
+  pointer-events: none;
 }
 
 /* File Item Styling */
@@ -50,11 +101,28 @@ h1 {
   background-color: #2a2a2a; /* Dark gray for file items */
   border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.file-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(187, 134, 252, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.file-item:hover::before {
+  left: 100%;
 }
 
 .file-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(187, 134, 252, 0.2); /* Purple shadow on hover */
+  box-shadow: 0 15px 30px rgba(187, 134, 252, 0.3); /* Purple shadow on hover */
   background-color: #333; /* Slightly lighter on hover */
 }
 
@@ -62,6 +130,8 @@ h1 {
   margin: 0;
   font-size: 1.2rem;
   color: #e0e0e0; /* Soft white text */
+  position: relative;
+  z-index: 1;
 }
 
 /* 3D Download Button */
@@ -76,6 +146,23 @@ h1 {
   overflow: hidden;
   border: 2px solid #bb86fc; /* Light purple border */
   box-shadow: 0 5px 0 #3700b3; /* Darker purple shadow for 3D effect */
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.download-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.download-btn:hover::before {
+  left: 100%;
 }
 
 .download-btn:hover {
@@ -91,17 +178,18 @@ h1 {
 
 /* Scrollbar Styling */
 .file-list::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 .file-list::-webkit-scrollbar-track {
   background: #1a1a1a; /* Dark track */
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .file-list::-webkit-scrollbar-thumb {
   background: #6200ee; /* Purple scrollbar handle */
-  border-radius: 5px;
+  border-radius: 10px;
+  border: 2px solid #1a1a1a; /* Add border to scrollbar */
 }
 
 .file-list::-webkit-scrollbar-thumb:hover {
