@@ -5,9 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Games Hub</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    .file-list {
+      margin-top: 20px;
+    }
+    .file-item {
+      margin-bottom: 10px;
+    }
+    .download-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .request-game {
+      margin-top: 20px; /* Adjust this value to control spacing */
+    }
+    .request-game input {
+      padding: 10px;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .request-game button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .request-game button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
+    <!-- Request Game Section (Moved Higher) -->
+    <div class="request-game">
+      <h2>Request a Game</h2>
+      <input type="text" id="gameId" placeholder="Enter Game ID (Numeric Only)" maxlength="10">
+      <button id="submitBtn" disabled>Enter</button>
+    </div>
+
+    <!-- Game Files Download Section -->
     <h1>Game Files Download</h1>
     <div class="file-list">
       <!-- File 1 -->
@@ -17,7 +68,7 @@
       </div>
       <!-- File 2 -->
       <div class="file-item">
-        <p>DRagon Ball Z: Sparking Zero</p>
+        <p>Dragon Ball Z: Sparking Zero</p>
         <a href="https://gofile.io/d/VERanB" download class="download-btn">Download</a>
       </div>
       <!-- Add more files as needed -->
@@ -36,5 +87,47 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const gameIdInput = document.getElementById('gameId');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Validate input to allow only numeric values
+    gameIdInput.addEventListener('input', () => {
+      const value = gameIdInput.value;
+      if (/^\d+$/.test(value)) {
+        submitBtn.disabled = false;
+      } else {
+        submitBtn.disabled = true;
+      }
+    });
+
+    // Handle form submission
+    submitBtn.addEventListener('click', async () => {
+      const gameId = gameIdInput.value;
+
+      // Send the game ID to the server
+      try {
+        const response = await fetch('/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ gameId }),
+        });
+
+        if (response.ok) {
+          alert('Game ID submitted successfully!');
+          gameIdInput.value = ''; // Clear the input
+          submitBtn.disabled = true; // Disable the button again
+        } else {
+          alert('Failed to submit Game ID. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      }
+    });
+  </script>
 </body>
 </html>
