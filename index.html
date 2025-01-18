@@ -7,10 +7,27 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     .container {
-      max-width: 800px;
+      max-width: 800px; /* Reduced width */
       margin: 0 auto;
-      padding: 20px;
+      padding: 20px; /* Adjusted padding */
       text-align: center;
+      min-height: 100vh; /* Make the page longer */
+    }
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px; /* Space between search bar and game count */
+      margin-bottom: 20px;
+    }
+    .game-count {
+      font-size: 1.5em;
+    }
+    .search-bar input {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
     .file-list {
       margin-top: 20px;
@@ -26,108 +43,139 @@
       text-decoration: none;
       border-radius: 5px;
     }
-    .request-game {
-      margin-top: 20px; /* Adjust this value to control spacing */
+    .bottom-section {
+      margin-top: 20px; /* Adjusted to move it higher up */
+      display: flex;
+      justify-content: space-between; /* Space out elements */
+      align-items: center;
+      padding: 0 20px; /* Add padding to the sides */
     }
-    .request-game input {
-      padding: 10px;
-      width: 200px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    .bottom-section p {
+      font-size: 1.2em;
     }
-    .request-game button {
+    .helper-text {
+      color: #FF0000; /* Red color */
+      text-shadow: 0 0 10px #FF0000, 0 0 20px #FF0000, 0 0 30px #FF0000; /* Red glow effect */
+    }
+    .made-by-text {
+      color: #8A2BE2; /* Purple color */
+      text-shadow: 0 0 10px #8A2BE2, 0 0 20px #8A2BE2, 0 0 30px #8A2BE2; /* Purple glow effect */
+    }
+    .discord-btn {
+      display: inline-block;
       padding: 10px 20px;
-      background-color: #28a745;
+      background-color: #7289DA; /* Discord brand color */
       color: white;
-      border: none;
+      text-decoration: none;
       border-radius: 5px;
-      cursor: pointer;
     }
-    .request-game button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
+    .discord-btn:hover {
+      background-color: #677bc4; /* Slightly darker on hover */
+    }
+    .helper-section {
+      display: flex;
+      align-items: center;
+      gap: 10px; /* Space between "Helper: Bilal" and "Bilal's Discord" */
+    }
+    .made-by-section {
+      display: flex;
+      align-items: center;
+      gap: 10px; /* Space between "Made By Bandai" and "Join our Discord" */
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Request Game Section (Moved Higher) -->
-    <div class="request-game">
-      <h2>Request a Game</h2>
-      <input type="text" id="gameId" placeholder="Enter Game ID (Numeric Only)" maxlength="10">
-      <button id="submitBtn" disabled>Enter</button>
+    <!-- Search Bar and Game Count -->
+    <div class="search-container">
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search by game name or ID">
+      </div>
+
+      <!-- Game Count -->
+      <div class="game-count">
+        Total Games: <span id="gameCount">5</span>
+      </div>
     </div>
 
+    <!-- Updated Heading -->
+    <h1>Games Hub</h1>
+
     <!-- Game Files Download Section -->
-    <h1>Game Files Download</h1>
-    <div class="file-list">
+    <div class="file-list" id="fileList">
       <!-- File 1 -->
-      <div class="file-item">
-        <p>Silent Hill 2</p>
+      <div class="file-item" data-name="silent hill 2" data-id="2124490">
+        <p>Silent Hill 2 - 2124490</p>
         <a href="https://gofile.io/d/k22MPo" download class="download-btn">Download</a>
       </div>
       <!-- File 2 -->
-      <div class="file-item">
-        <p>Dragon Ball Z: Sparking Zero</p>
+      <div class="file-item" data-name="dragon ball z sparking zero" data-id="1790600">
+        <p>Dragon Ball Z: Sparking Zero - 1790600</p>
         <a href="https://gofile.io/d/VERanB" download class="download-btn">Download</a>
       </div>
       <!-- Add more files as needed -->
       <!-- Example of additional files -->
-      <div class="file-item">
-        <p>Little Nigtmares 1</p>
+      <div class="file-item" data-name="little nightmares 1" data-id="424840">
+        <p>Little Nigtmares 1 - 424840</p>
         <a href="https://gofile.io/d/vNkWGv" download class="download-btn">Download</a>
       </div>
-      <div class="file-item">
-        <p>Little Nightmares 2</p>
+      <div class="file-item" data-name="little nightmares 2" data-id="860510">
+        <p>Little Nightmares 2 - 860510</p>
         <a href="https://gofile.io/d/MFYvg0" download class="download-btn">Download</a>
       </div>
-      <div class="file-item">
-        <p>Sonic X Shadow Generations</p>
+      <div class="file-item" data-name="sonic x shadow generations" data-id="2513280">
+        <p>Sonic X Shadow Generations - 2513280</p>
         <a href="https://gofile.io/d/IpJgXD" download class="download-btn">Download</a>
+      </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="bottom-section">
+      <div class="helper-section">
+        <p class="helper-text">Helper: Bilal</p> <!-- "Helper: Bilal" -->
+        <a href="https://discord.gg/Ksv77c3E" class="discord-btn" target="_blank">Bilal's Discord</a>
+      </div>
+      <div class="made-by-section">
+        <p class="made-by-text">Made By Bandai</p>
+        <a href="https://discord.gg/2Y89r4x8" class="discord-btn" target="_blank">Join our Discord</a>
       </div>
     </div>
   </div>
 
   <script>
-    const gameIdInput = document.getElementById('gameId');
-    const submitBtn = document.getElementById('submitBtn');
+    // Get references to elements
+    const searchInput = document.getElementById('searchInput');
+    const fileList = document.getElementById('fileList');
+    const gameCountElement = document.getElementById('gameCount');
+    const fileItems = document.querySelectorAll('.file-item');
 
-    // Validate input to allow only numeric values
-    gameIdInput.addEventListener('input', () => {
-      const value = gameIdInput.value;
-      if (/^\d+$/.test(value)) {
-        submitBtn.disabled = false;
-      } else {
-        submitBtn.disabled = true;
-      }
-    });
+    // Function to filter games based on search input
+    function filterGames() {
+      const searchTerm = searchInput.value.toLowerCase();
+      let visibleCount = 0;
 
-    // Handle form submission
-    submitBtn.addEventListener('click', async () => {
-      const gameId = gameIdInput.value;
+      fileItems.forEach(item => {
+        const gameName = item.getAttribute('data-name').toLowerCase();
+        const gameId = item.getAttribute('data-id').toLowerCase();
 
-      // Send the game ID to the server
-      try {
-        const response = await fetch('/send-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ gameId }),
-        });
-
-        if (response.ok) {
-          alert('Game ID submitted successfully!');
-          gameIdInput.value = ''; // Clear the input
-          submitBtn.disabled = true; // Disable the button again
+        if (gameName.includes(searchTerm) || gameId.includes(searchTerm)) {
+          item.style.display = 'block';
+          visibleCount++;
         } else {
-          alert('Failed to submit Game ID. Please try again.');
+          item.style.display = 'none';
         }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-      }
-    });
+      });
+
+      // Update the game count
+      gameCountElement.textContent = visibleCount;
+    }
+
+    // Add event listener for search input
+    searchInput.addEventListener('input', filterGames);
+
+    // Initialize game count
+    gameCountElement.textContent = fileItems.length;
   </script>
 </body>
 </html>
