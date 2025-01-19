@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Games Hub</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Add FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body {
       margin: 0;
@@ -26,6 +28,7 @@
       min-height: 100vh; /* Make the page longer */
       display: flex;
       gap: 20px; /* Space between main content and sidebar */
+      position: relative; /* Needed for absolute positioning of logos */
     }
     .main-content {
       flex: 3; /* Takes up 3 parts of the available space */
@@ -140,12 +143,40 @@
     .steamtools-btn:hover {
       background-color: #0056b3; /* Darker blue on hover */
     }
+    .logo-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px; /* Space between logos */
+    }
+    .logo-container i {
+      font-size: 24px;
+      color: #bb86fc; /* Purple accent for logos */
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .logo-container i:hover {
+      color: #8A2BE2; /* Darker purple on hover */
+    }
+    .tab-content {
+      display: none; /* Hide all tab content by default */
+    }
+    .tab-content.active {
+      display: block; /* Show active tab content */
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Main Content -->
-    <div class="main-content">
+    <!-- Logo Container -->
+    <div class="logo-container">
+      <i class="fas fa-home" onclick="openTab('home')"></i> <!-- Home Logo -->
+      <i class="fas fa-file" onclick="openTab('files')"></i> <!-- Files Logo -->
+    </div>
+
+    <!-- Home Tab -->
+    <div class="main-content tab-content active" id="home">
       <!-- Search Bar and Game Count -->
       <div class="search-container">
         <!-- Search Bar -->
@@ -177,7 +208,7 @@
           <p>Little Nightmares 1 - 424840</p>
           <a href="https://gofile.io/d/vNkWGv" download class="download-btn">Download</a>
         </div>
-        <div class="file-item" data-name="little nightmares 2" data-id="860510">
+		 <div class="file-item" data-name="little nightmares 2" data-id="860510">
           <p>Little Nightmares 2 - 860510</p>
           <a href="https://gofile.io/d/MFYvg0" download class="download-btn">Download</a>
         </div>
@@ -427,6 +458,58 @@
           <p>Men Of War™ - 7830</p>
           <a href="https://gofile.io/d/GqvZMg" download class="download-btn">Download</a>
         </div>
+	          <div class="file-item" data-name="7830" data-id="7830">
+          <p>Until Dawn - 2172010</p>
+          <a href="https://gofile.io/d/HjjAfA" download class="download-btn">Download</a>
+        </div>
+		</div>
+
+      <!-- Bottom Section -->
+      <div class="bottom-section">
+        <div class="helper-section">
+          <p class="helper-text">Helper: Bilal</p> <!-- "Helper: Bilal" -->
+          <a href="https://discord.gg/Ksv77c3E" class="discord-btn" target="_blank">Bilal's Discord</a>
+        </div>
+        <div class="made-by-section">
+          <p class="made-by-text">Made By Bandai</p>
+          <a href="https://discord.gg/2Y89r4x8" class="discord-btn" target="_blank">Join our Discord</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Files Tab -->
+    <div class="main-content tab-content" id="files">
+      <!-- Search Bar and Game Count -->
+      <div class="search-container">
+        <!-- Search Bar -->
+        <div class="search-bar">
+          <input type="text" id="searchInputFiles" placeholder="Search by Fix name">
+        </div>
+
+        <!-- Game Count -->
+        <div class="game-count">
+          Total Fixes: <span id="gameCountFiles">3</span>
+        </div>
+      </div>
+
+      <!-- Updated Heading -->
+      <h1>Fixes</h1>
+
+      <!-- Game Files Download Section -->
+      <div class="file-list" id="fileListFiles">
+        <!-- Only the first 3 games -->
+        <div class="file-item" data-name="silent hill 2" data-id="2124490">
+          <p>Ubisoft Fix</p>
+          <a href="https://gofile.io/d/k22MPo" download class="download-btn">Download</a>
+        </div>
+        <div class="file-item" data-name="dragon ball z sparking zero" data-id="1790600">
+          <p>Gta V Fix</p>
+          <a href="https://gofile.io/d/VERanB" download class="download-btn">Download</a>
+        </div>
+        <div class="file-item" data-name="little nightmares 1" data-id="424840">
+          <p>Read Dead Redemption 1 Fix</p>
+          <a href="https://gofile.io/d/vNkWGv" download class="download-btn">Download</a>
+        </div>
       </div>
 
       <!-- Bottom Section -->
@@ -443,7 +526,7 @@
     </div>
 
     <!-- Sidebar for Online Games -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
       <!-- SteamTools Button -->
       <a href="https://steamtools.net/" class="steamtools-btn" target="_blank">Get SteamTools</a>
 
@@ -455,14 +538,70 @@
   </div>
 
   <script>
-    // Get references to elements
-    const searchInput = document.getElementById('searchInput');
-    const fileList = document.getElementById('fileList');
-    const gameCountElement = document.getElementById('gameCount');
-    const fileItems = document.querySelectorAll('.file-item');
-    const onlineGamesList = document.getElementById('onlineGamesList');
+    // Function to switch between tabs
+    function openTab(tabName) {
+      // Hide all tab content
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(tab => tab.classList.remove('active'));
 
-    // Array to track online games
+      // Show the selected tab content
+      document.getElementById(tabName).classList.add('active');
+
+      // Show or hide the sidebar based on the active tab
+      const sidebar = document.getElementById('sidebar');
+      if (tabName === 'home') {
+        sidebar.style.display = 'block'; // Show sidebar on Home tab
+      } else {
+        sidebar.style.display = 'none'; // Hide sidebar on Files tab
+      }
+    }
+
+    // Function to filter games based on search input
+    function filterGames(searchInput, fileList, gameCountElement, fileItems) {
+      const searchTerm = searchInput.value.toLowerCase();
+      let visibleCount = 0;
+
+      fileItems.forEach(item => {
+        const gameName = item.getAttribute('data-name').toLowerCase();
+        const gameId = item.getAttribute('data-id').toLowerCase();
+
+        if (gameName.includes(searchTerm) || gameId.includes(searchTerm)) {
+          item.style.display = 'block';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Update the game count
+      gameCountElement.textContent = visibleCount;
+    }
+
+    // Add event listeners for search inputs
+    document.getElementById('searchInput').addEventListener('input', () => {
+      filterGames(
+        document.getElementById('searchInput'),
+        document.getElementById('fileList'),
+        document.getElementById('gameCount'),
+        document.querySelectorAll('#fileList .file-item')
+      );
+    });
+
+    document.getElementById('searchInputFiles').addEventListener('input', () => {
+      filterGames(
+        document.getElementById('searchInputFiles'),
+        document.getElementById('fileListFiles'),
+        document.getElementById('gameCountFiles'),
+        document.querySelectorAll('#fileListFiles .file-item')
+      );
+    });
+
+    // Initialize game count and online games list
+    document.getElementById('gameCount').textContent = document.querySelectorAll('#fileList .file-item').length;
+    document.getElementById('gameCountFiles').textContent = document.querySelectorAll('#fileListFiles .file-item').length;
+
+    // Update the online games list
+    const onlineGamesList = document.getElementById('onlineGamesList');
     const onlineGames = [
       "Silent Hill 2 - 2124490",
       "Dragon Ball Z: Sparking Zero - 1790600",
@@ -483,94 +622,13 @@
       "The Last of Us Part II - 1462040",
       "Spider-Man: Miles Morales - 1817190",
       "Resident Evil Village - 1196590",
-      // Add new online games here if applicable
-      "10 - 10",
-      "50 - 50",
-      "80 - 80",
-      "100 - 100",
-      "130 - 130",
-      "218 - 218",
-      "220 - 220",
-      "240 - 240",
-      "320 - 320",
-      "400 - 400",
-      "440 - 440",
-      "480 - 480",
-      "500 - 500",
-      "550 - 550",
-      "570 - 570",
-      "620 - 620",
-      "730 - 730",
-      "2200 - 2200",
-      "2210 - 2210",
-      "2280 - 2280",
-      "2310 - 2310",
-      "2320 - 2320",
-      "2620 - 2620",
-      "2630 - 2630",
-      "2990 - 2990",
-      "3130 - 3130",
-      "3330 - 3330",
-      "3390 - 3390",
-      "3410 - 3410",
-      "3430 - 3430",
-      "3590 - 3590",
-      "3620 - 3620",
-      "3900 - 3900",
-      "3910 - 3910",
-      "4000 - 4000",
-      "4500 - 4500",
-      "4700 - 4700",
-      "4760 - 4760",
-      "4780 - 4780",
-      "6060 - 6060",
-      "6220 - 6220",
-      "6850 - 6850",
-      "6860 - 6860",
-      "6880 - 6880",
-      "6900 - 6900",
-      "7000 - 7000",
-      "7520 - 7520",
-      "7830 - 7830"
     ];
 
-    // Function to update the online games list
-    function updateOnlineGamesList() {
-      onlineGamesList.innerHTML = ''; // Clear the list
-      onlineGames.forEach(game => {
-        const listItem = document.createElement('li');
-        listItem.textContent = game;
-        onlineGamesList.appendChild(listItem);
-      });
-    }
-
-    // Function to filter games based on search input
-    function filterGames() {
-      const searchTerm = searchInput.value.toLowerCase();
-      let visibleCount = 0;
-
-      fileItems.forEach(item => {
-        const gameName = item.getAttribute('data-name').toLowerCase();
-        const gameId = item.getAttribute('data-id').toLowerCase();
-
-        if (gameName.includes(searchTerm) || gameId.includes(searchTerm)) {
-          item.style.display = 'block';
-          visibleCount++;
-        } else {
-          item.style.display = 'none';
-        }
-      });
-
-      // Update the game count
-      gameCountElement.textContent = visibleCount;
-    }
-
-    // Add event listener for search input
-    searchInput.addEventListener('input', filterGames);
-
-    // Initialize game count and online games list
-    gameCountElement.textContent = fileItems.length;
-    updateOnlineGamesList();
+    onlineGames.forEach(game => {
+      const listItem = document.createElement('li');
+      listItem.textContent = game;
+      onlineGamesList.appendChild(listItem);
+    });
   </script>
 </body>
 </html>
