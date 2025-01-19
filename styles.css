@@ -10,7 +10,7 @@ body {
   align-items: center;
   min-height: 100vh;
   overflow: hidden;
-  background-image: url('file:///C:/Users/Admin/Documents/Games%20Hub%20Site/Galaxy.jpg'); /* Add your background image here */
+  background-image: url('Galaxy.jpg'); /* Add your background image here */
   background-size: cover; /* Ensure the image covers the entire background */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat; /* Prevent the image from repeating */
