@@ -6,7 +6,6 @@
   <title>Games Hub</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* General Styles */
     body {
       margin: 0;
       padding: 0;
@@ -19,123 +18,47 @@
       min-height: 100vh;
       overflow: hidden;
     }
-
-    /* Login/Signup Container */
-    .auth-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      width: 100%;
-      background-color: #0a0a0a;
-    }
-
-    .auth-box {
-      background-color: #1a1a1a;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      width: 400px;
-      text-align: center;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    .auth-box h2 {
-      margin-bottom: 20px;
-      color: #bb86fc; /* Purple accent for headings */
-      text-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
-    }
-
-    .auth-box input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #333;
-      color: #e0e0e0;
-    }
-
-    .auth-box button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .auth-box button:hover {
-      background-color: #0056b3;
-    }
-
-    .auth-box p {
-      margin-top: 10px;
-      color: #e0e0e0;
-    }
-
-    .auth-box a {
-      color: #007bff;
-      text-decoration: none;
-    }
-
-    .auth-box a:hover {
-      text-decoration: underline;
-    }
-
-    /* Main App Container */
     .container {
-      max-width: 1200px;
+      max-width: 1200px; /* Increased width to accommodate the sidebar */
       margin: 0 auto;
-      padding: 20px;
+      padding: 20px; /* Adjusted padding */
       text-align: center;
-      min-height: 100vh;
-      display: none; /* Hidden by default */
-      gap: 20px;
+      min-height: 100vh; /* Make the page longer */
+      display: flex;
+      gap: 20px; /* Space between main content and sidebar */
     }
-
-    /* Other Styles (same as before) */
     .main-content {
-      flex: 3;
+      flex: 3; /* Takes up 3 parts of the available space */
     }
-
     .sidebar {
-      flex: 1;
-      background-color: #1a1a1a;
+      flex: 1; /* Takes up 1 part of the available space */
+      background-color: #1a1a1a; /* Slightly lighter black for the sidebar */
       border-radius: 15px;
       padding: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
-
     .search-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
+      gap: 20px; /* Space between search bar and game count */
       margin-bottom: 20px;
     }
-
     .game-count {
       font-size: 1.5em;
     }
-
     .search-bar input {
       padding: 10px;
       width: 300px;
       border: 1px solid #ccc;
       border-radius: 5px;
     }
-
     .file-list {
       margin-top: 20px;
     }
-
     .file-item {
       margin-bottom: 10px;
     }
-
     .download-btn {
       display: inline-block;
       padding: 10px 20px;
@@ -144,145 +67,103 @@
       text-decoration: none;
       border-radius: 5px;
     }
-
     .bottom-section {
-      margin-top: 20px;
+      margin-top: 20px; /* Adjusted to move it higher up */
       display: flex;
-      justify-content: space-between;
+      justify-content: space-between; /* Space out elements */
       align-items: center;
-      padding: 0 20px;
+      padding: 0 20px; /* Add padding to the sides */
     }
-
     .bottom-section p {
       font-size: 1.2em;
     }
-
     .helper-text {
-      color: #FF0000;
-      text-shadow: 0 0 10px #FF0000, 0 0 20px #FF0000, 0 0 30px #FF0000;
+      color: #FF0000; /* Red color */
+      text-shadow: 0 0 10px #FF0000, 0 0 20px #FF0000, 0 0 30px #FF0000; /* Red glow effect */
     }
-
     .made-by-text {
-      color: #8A2BE2;
-      text-shadow: 0 0 10px #8A2BE2, 0 0 20px #8A2BE2, 0 0 30px #8A2BE2;
+      color: #8A2BE2; /* Purple color */
+      text-shadow: 0 0 10px #8A2BE2, 0 0 20px #8A2BE2, 0 0 30px #8A2BE2; /* Purple glow effect */
     }
-
     .discord-btn {
       display: inline-block;
       padding: 10px 20px;
-      background-color: #7289DA;
+      background-color: #7289DA; /* Discord brand color */
       color: white;
       text-decoration: none;
       border-radius: 5px;
     }
-
     .discord-btn:hover {
-      background-color: #677bc4;
+      background-color: #677bc4; /* Slightly darker on hover */
     }
-
     .helper-section {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 10px; /* Space between "Helper: Bilal" and "Bilal's Discord" */
     }
-
     .made-by-section {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 10px; /* Space between "Made By Bandai" and "Join our Discord" */
     }
-
     .sidebar h2 {
       font-size: 1.5em;
       margin-bottom: 15px;
-      color: #bb86fc;
+      color: #bb86fc; /* Purple accent for headings */
       text-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
     }
-
     .online-games-list {
       list-style-type: none;
       padding: 0;
     }
-
     .online-games-list li {
       margin-bottom: 10px;
       font-size: 1.1em;
-      color: #e0e0e0;
+      color: #e0e0e0; /* Soft white text */
     }
-
     .online-games-list li::before {
-      content: "✔";
-      color: #28a745;
+      content: "✔"; /* Checkmark for online games */
+      color: #28a745; /* Green color for checkmark */
       margin-right: 10px;
     }
-
     .steamtools-btn {
       display: inline-block;
       padding: 10px 20px;
-      background-color: #007bff;
+      background-color: #007bff; /* Blue color for the button */
       color: white;
       text-decoration: none;
       border-radius: 5px;
-      margin-bottom: 20px;
+      margin-bottom: 20px; /* Space below the button */
       font-weight: bold;
       transition: background-color 0.3s ease;
     }
-
     .steamtools-btn:hover {
-      background-color: #0056b3;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      background-color: #0056b3; /* Darker blue on hover */
     }
   </style>
 </head>
 <body>
-  <!-- Login/Signup Screen -->
-  <div class="auth-container" id="authContainer">
-    <div class="auth-box" id="signupBox">
-      <h2>Sign Up</h2>
-      <input type="text" id="signupUsername" placeholder="Username">
-      <input type="password" id="signupPassword" placeholder="Password">
-      <button onclick="signup()">Sign Up</button>
-      <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
-    </div>
-    <div class="auth-box" id="loginBox" style="display: none;">
-      <h2>Login</h2>
-      <input type="text" id="loginUsername" placeholder="Username">
-      <input type="password" id="loginPassword" placeholder="Password">
-      <button onclick="login()">Login</button>
-      <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
-    </div>
-  </div>
-
-  <!-- Main App -->
-  <div class="container" id="mainContainer">
+  <div class="container">
     <!-- Main Content -->
     <div class="main-content">
       <!-- Search Bar and Game Count -->
       <div class="search-container">
+        <!-- Search Bar -->
         <div class="search-bar">
           <input type="text" id="searchInput" placeholder="Search by game name or ID">
         </div>
+
+        <!-- Game Count -->
         <div class="game-count">
           Total Games: <span id="gameCount">19</span>
         </div>
       </div>
 
+      <!-- Updated Heading -->
       <h1>Games Hub</h1>
 
       <!-- Game Files Download Section -->
       <div class="file-list" id="fileList">
-        <!-- File Items (same as before) -->
         <!-- File 1 -->
         <div class="file-item" data-name="silent hill 2" data-id="2124490">
           <p>Silent Hill 2 - 2124490</p>
@@ -383,7 +264,7 @@
       <!-- Bottom Section -->
       <div class="bottom-section">
         <div class="helper-section">
-          <p class="helper-text">Helper: Bilal</p>
+          <p class="helper-text">Helper: Bilal</p> <!-- "Helper: Bilal" -->
           <a href="https://discord.gg/Ksv77c3E" class="discord-btn" target="_blank">Bilal's Discord</a>
         </div>
         <div class="made-by-section">
@@ -395,7 +276,9 @@
 
     <!-- Sidebar for Online Games -->
     <div class="sidebar">
+      <!-- SteamTools Button -->
       <a href="https://steamtools.net/" class="steamtools-btn" target="_blank">Get SteamTools</a>
+
       <h2>Online to Download</h2>
       <ul class="online-games-list" id="onlineGamesList">
         <!-- Online games will be dynamically added here -->
@@ -404,56 +287,73 @@
   </div>
 
   <script>
-    // Simulated user database
-    let users = JSON.parse(localStorage.getItem('users')) || [];
+    // Get references to elements
+    const searchInput = document.getElementById('searchInput');
+    const fileList = document.getElementById('fileList');
+    const gameCountElement = document.getElementById('gameCount');
+    const fileItems = document.querySelectorAll('.file-item');
+    const onlineGamesList = document.getElementById('onlineGamesList');
 
-    // Function to show the login form
-    function showLogin() {
-      document.getElementById('signupBox').style.display = 'none';
-      document.getElementById('loginBox').style.display = 'block';
+    // Array to track online games
+    const onlineGames = [
+      "Silent Hill 2 - 2124490",
+      "Dragon Ball Z: Sparking Zero - 1790600",
+      "Little Nightmares 1 - 424840",
+      "Little Nightmares 2 - 860510",
+      "Sonic X Shadow Generations - 2513280",
+      "Elden Ring - 1245620",
+      "DYNASTY WARRIORS: ORIGINS - 2384580",
+      "ARK: Survival Evolved - 346110",
+      "ARK: Survival Ascended - 2399830",
+      "Cyberpunk 2077 - 1091500",
+      "The Witcher 3: Wild Hunt - 292030",
+      "Red Dead Redemption 2 - 1174180",
+      "Assassin's Creed Valhalla - 2208920",
+      "FIFA 23 - 1811260",
+      "God of War - 1593500",
+      "Horizon Zero Dawn - 1151640",
+      "The Last of Us Part II - 1462040",
+      "Spider-Man: Miles Morales - 1817190",
+      "Resident Evil Village - 1196590"
+    ];
+
+    // Function to update the online games list
+    function updateOnlineGamesList() {
+      onlineGamesList.innerHTML = ''; // Clear the list
+      onlineGames.forEach(game => {
+        const listItem = document.createElement('li');
+        listItem.textContent = game;
+        onlineGamesList.appendChild(listItem);
+      });
     }
 
-    // Function to show the signup form
-    function showSignup() {
-      document.getElementById('loginBox').style.display = 'none';
-      document.getElementById('signupBox').style.display = 'block';
+    // Function to filter games based on search input
+    function filterGames() {
+      const searchTerm = searchInput.value.toLowerCase();
+      let visibleCount = 0;
+
+      fileItems.forEach(item => {
+        const gameName = item.getAttribute('data-name').toLowerCase();
+        const gameId = item.getAttribute('data-id').toLowerCase();
+
+        if (gameName.includes(searchTerm) || gameId.includes(searchTerm)) {
+          item.style.display = 'block';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Update the game count
+      gameCountElement.textContent = visibleCount;
     }
 
-    // Function to handle signup
-    function signup() {
-      const username = document.getElementById('signupUsername').value;
-      const password = document.getElementById('signupPassword').value;
+    // Add event listener for search input
+    searchInput.addEventListener('input', filterGames);
 
-      if (!username || !password) {
-        alert('Please fill in all fields.');
-        return;
-      }
-
-      if (users.some(u => u.username === username)) {
-        alert('Username already exists.');
-        return;
-      }
-
-      users.push({ username, password });
-      localStorage.setItem('users', JSON.stringify(users));
-      alert('Signup successful! Please login.');
-      showLogin();
-    }
-
-    // Function to handle login
-    function login() {
-      const username = document.getElementById('loginUsername').value;
-      const password = document.getElementById('loginPassword').value;
-
-      const user = users.find(u => u.username === username && u.password === password);
-
-      if (user) {
-        alert('Login successful!');
-        document.getElementById('authContainer').style.display = 'none';
-        document.getElementById('mainContainer').style.display = 'flex';
-      } else {
-        alert('Invalid username or password.');
-      }
-    }
-
-    // Initialize the app with the
+    // Initialize game count and online games list
+    gameCountElement.textContent = fileItems.length;
+    updateOnlineGamesList();
+  </script>
+</body>
+</html>
