@@ -176,6 +176,100 @@ h1::after {
   transform: translateY(4px);
 }
 
+/* SteamTools Button Styling */
+.steamtools-btn {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #007bff; /* Blue background */
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #0056b3; /* Darker blue border */
+  box-shadow: 0 5px 0 #004080; /* Darker blue shadow for 3D effect */
+  font-weight: bold;
+  letter-spacing: 1px;
+  animation: jump 1s infinite ease-in-out; /* Add jumping animation */
+}
+
+.steamtools-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  box-shadow: 0 3px 0 #003366; /* Adjust shadow on hover */
+  transform: translateY(2px);
+}
+
+.steamtools-btn:active {
+  box-shadow: 0 1px 0 #003366;
+  transform: translateY(4px);
+}
+
+/* Bilal's Discord Button Styling */
+.helper-section .discord-btn {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #7289DA; /* Discord brand color */
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #677bc4; /* Slightly darker border */
+  box-shadow: 0 5px 0 #5b6eae; /* Darker shadow for 3D effect */
+  font-weight: bold;
+  letter-spacing: 1px;
+  animation: jump 1s infinite ease-in-out; /* Add jumping animation */
+}
+
+.helper-section .discord-btn:hover {
+  background-color: #677bc4; /* Slightly darker on hover */
+  box-shadow: 0 3px 0 #5b6eae; /* Adjust shadow on hover */
+  transform: translateY(2px);
+}
+
+.helper-section .discord-btn:active {
+  box-shadow: 0 1px 0 #5b6eae;
+  transform: translateY(4px);
+}
+
+/* Join our Discord Button Styling */
+.made-by-section .discord-btn {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #7289DA; /* Discord brand color */
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #677bc4; /* Slightly darker border */
+  box-shadow: 0 5px 0 #5b6eae; /* Darker shadow for 3D effect */
+  font-weight: bold;
+  letter-spacing: 1px;
+  animation: jump 1s infinite ease-in-out; /* Add jumping animation */
+}
+
+.made-by-section .discord-btn:hover {
+  background-color: #677bc4; /* Slightly darker on hover */
+  box-shadow: 0 3px 0 #5b6eae; /* Adjust shadow on hover */
+  transform: translateY(2px);
+}
+
+.made-by-section .discord-btn:active {
+  box-shadow: 0 1px 0 #5b6eae;
+  transform: translateY(4px);
+}
+
+/* Jump Animation */
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0); /* Start and end at normal position */
+  }
+  50% {
+    transform: translateY(-10px); /* Jump up */
+  }
+}
+
 /* Scrollbar Styling */
 .file-list::-webkit-scrollbar {
   width: 12px;
