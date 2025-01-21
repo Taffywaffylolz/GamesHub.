@@ -384,14 +384,111 @@
     .tab-content.active {
       display: block; /* Show active tab content */
     }
+
+    /* Add this CSS for the modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(187, 134, 252, 0.5);
+    }
+
+    .modal-content input {
+      padding: 10px;
+      margin: 10px 0;
+      width: 200px;
+      border: 1px solid #bb86fc;
+      border-radius: 5px;
+      background-color: #333;
+      color: #e0e0e0;
+    }
+
+    .modal-content button {
+      padding: 10px 20px;
+      background-color: #6200ee;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-content button:hover {
+      background-color: #bb86fc;
+    }
+
+    .modal-content .error {
+      color: #ff4444;
+      margin-top: 10px;
+    }
+
+    /* Admin Panel Form Styling */
+    .admin-form {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: rgba(34, 34, 34, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .admin-input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #bb86fc;
+      border-radius: 5px;
+      background-color: #333;
+      color: #e0e0e0;
+      font-size: 1rem;
+    }
+
+    .admin-btn {
+      padding: 10px 20px;
+      margin: 5px;
+      background-color: #6200ee;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .admin-btn:hover {
+      background-color: #bb86fc;
+    }
   </style>
 </head>
 <body>
+  <!-- Modal for Passcode -->
+  <div id="passcodeModal" class="modal">
+    <div class="modal-content">
+      <h2>Enter Passcode</h2>
+      <input type="password" id="passcodeInput" placeholder="Enter Passcode">
+      <button onclick="validatePasscode()">Submit</button>
+      <p id="errorMessage" class="error"></p>
+    </div>
+  </div>
+
   <div class="container">
     <!-- Logo Container -->
     <div class="logo-container">
       <i class="fas fa-home" onclick="openTab('home')"></i> <!-- Home Logo -->
       <i class="fas fa-file" onclick="openTab('files')"></i> <!-- Files Logo -->
+      <i class="fas fa-times-circle" onclick="openPasscodeTab()"></i> <!-- New Passcode Logo -->
     </div>
 
     <!-- Home Tab -->
@@ -748,6 +845,22 @@
       </div>
     </div>
 
+    <!-- New Passcode Tab -->
+    <div class="main-content tab-content" id="passcodeTab">
+      <h1>Admin Panel</h1>
+      <p>Welcome to the Admin panel you have been invited to the staff team by Bandai or 47.</p>
+
+      <!-- Add Game Form -->
+      <div class="admin-form">
+        <h2>Add/Remove Game</h2>
+        <input type="text" id="gameName" placeholder="Game Name" class="admin-input">
+        <input type="text" id="gameId" placeholder="Game ID" class="admin-input">
+        <input type="text" id="gameLink" placeholder="Download Link" class="admin-input">
+        <button onclick="addGame()" class="admin-btn">Add Game</button>
+        <button onclick="removeGame()" class="admin-btn">Remove Game</button>
+      </div>
+    </div>
+
     <!-- Sidebar for Online Games -->
     <div class="sidebar" id="sidebar">
       <!-- SteamTools Button -->
@@ -761,6 +874,26 @@
   </div>
 
   <script>
+    // Function to open the passcode tab
+    function openPasscodeTab() {
+      const modal = document.getElementById('passcodeModal');
+      modal.style.display = 'flex'; // Show the modal
+    }
+
+    // Function to validate the passcode
+    function validatePasscode() {
+      const passcodeInput = document.getElementById('passcodeInput').value;
+      const errorMessage = document.getElementById('errorMessage');
+      const modal = document.getElementById('passcodeModal');
+
+      if (passcodeInput === "MadeByBandai") {
+        modal.style.display = 'none'; // Hide the modal
+        openTab('passcodeTab'); // Open the secret tab
+      } else {
+        errorMessage.textContent = "Incorrect passcode. Please try again.";
+      }
+    }
+
     // Function to switch between tabs
     function openTab(tabName) {
       // Hide all tab content
@@ -775,7 +908,7 @@
       if (tabName === 'home') {
         sidebar.style.display = 'block'; // Show sidebar on Home tab
       } else {
-        sidebar.style.display = 'none'; // Hide sidebar on Files tab
+        sidebar.style.display = 'none'; // Hide sidebar on other tabs
       }
     }
 
@@ -852,6 +985,79 @@
       listItem.textContent = game;
       onlineGamesList.appendChild(listItem);
     });
+
+    // Function to load games from localStorage
+    function loadGames() {
+      const games = JSON.parse(localStorage.getItem('games')) || [];
+      const fileList = document.getElementById('fileList');
+
+      // Clear existing dynamically added games
+      const existingGames = fileList.querySelectorAll('.file-item.dynamic');
+      existingGames.forEach(game => game.remove());
+
+      // Add games from localStorage
+      games.forEach(game => {
+        const fileItem = document.createElement('div');
+        fileItem.className = 'file-item dynamic';
+        fileItem.setAttribute('data-name', game.name.toLowerCase());
+        fileItem.setAttribute('data-id', game.id);
+
+        fileItem.innerHTML = `
+          <p>${game.name} - ${game.id}</p>
+          <a href="${game.link}" download class="download-btn">Download</a>
+        `;
+
+        fileList.appendChild(fileItem);
+      });
+
+      // Update the game count
+      const totalGames = document.querySelectorAll('#fileList .file-item').length;
+      document.getElementById('gameCount').textContent = totalGames;
+    }
+
+    // Function to add a game
+    function addGame() {
+      const gameName = document.getElementById('gameName').value;
+      const gameId = document.getElementById('gameId').value;
+      const gameLink = document.getElementById('gameLink').value;
+
+      if (!gameName || !gameId || !gameLink) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      const games = JSON.parse(localStorage.getItem('games')) || [];
+      games.push({ name: gameName, id: gameId, link: gameLink });
+      localStorage.setItem('games', JSON.stringify(games));
+
+      // Clear input fields
+      document.getElementById('gameName').value = '';
+      document.getElementById('gameId').value = '';
+      document.getElementById('gameLink').value = '';
+
+      // Reload games
+      loadGames();
+    }
+
+    // Function to remove a game
+    function removeGame() {
+      const gameId = document.getElementById('gameId').value;
+
+      if (!gameId) {
+        alert('Please enter a Game ID to remove.');
+        return;
+      }
+
+      const games = JSON.parse(localStorage.getItem('games')) || [];
+      const updatedGames = games.filter(game => game.id !== gameId);
+      localStorage.setItem('games', JSON.stringify(updatedGames));
+
+      // Reload games
+      loadGames();
+    }
+
+    // Load games when the page loads
+    window.onload = loadGames;
   </script>
 </body>
 </html>
