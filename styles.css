@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #0a0a0a; /* Dark black background */
+  background-color: #0a0a0a; /* Fallback color */
   color: #e0e0e0; /* Soft white text */
   display: flex;
   justify-content: center;
@@ -27,18 +27,16 @@ body {
 }
 
 .container {
-  max-width: 1200px; /* Increased width to accommodate the sidebar */
-  margin: 0 auto;
-  padding: 20px; /* Adjusted padding */
   text-align: center;
-  min-height: 100vh; /* Make the page longer */
-  display: flex;
-  gap: 20px; /* Space between main content and sidebar */
-  position: relative; /* Needed for absolute positioning of logos */
+  max-width: 800px;
+  width: 90%;
+  padding: 20px;
   background-color: rgba(26, 26, 26, 0.9); /* Slightly lighter black for the container with transparency */
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   border: 1px solid #333; /* Subtle border */
+  position: relative;
+  overflow: hidden;
   backdrop-filter: blur(10px); /* Blur effect */
 }
 
@@ -170,10 +168,8 @@ h1::after {
   z-index: 1;
 }
 
-/* Download Button and Other Buttons */
-.download-btn,
-.steamtools-btn,
-.discord-btn {
+/* Download Button */
+.download-btn {
   text-decoration: none;
   color: #ffffff;
   background-color: #6200ee; /* Deep purple background */
@@ -192,7 +188,7 @@ h1::after {
   animation: pulse 1.5s infinite ease-in-out, jumpUpDown 1.5s infinite ease-in-out; /* Combine animations */
 }
 
-/* Pulsing Animation for Buttons */
+/* Pulsing Animation for Download Button */
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);
@@ -212,50 +208,22 @@ h1::after {
   }
 }
 
-/* Hover Effects for Buttons */
-.download-btn:hover,
-.steamtools-btn:hover,
-.discord-btn:hover {
+/* Hover Effects for Download Buttons */
+.download-btn:hover {
   background-color: #bb86fc; /* Light purple on hover */
   box-shadow: 0 3px 0 #6200ee; /* Adjust shadow on hover */
   transform: translateY(2px) scale(1.05); /* Combine hover effects */
   animation-play-state: paused; /* Pause animation on hover */
 }
 
-.download-btn:active,
-.steamtools-btn:active,
-.discord-btn:active {
+.download-btn:active {
   box-shadow: 0 1px 0 #6200ee;
   transform: translateY(4px);
 }
 
-/* Specific Styles for Discord Buttons */
-.discord-btn {
-  background-color: #7289DA; /* Discord brand color */
-  border-color: #677bc4; /* Slightly darker border */
-  box-shadow: 0 5px 0 #4e5d94; /* Darker shadow for 3D effect */
-}
-
-.discord-btn:hover {
-  background-color: #677bc4; /* Slightly darker on hover */
-}
-
-/* Specific Styles for SteamTools Button */
-.steamtools-btn {
-  background-color: #007bff; /* Blue color for SteamTools */
-  border-color: #0056b3; /* Slightly darker border */
-  box-shadow: 0 5px 0 #004080; /* Darker shadow for 3D effect */
-}
-
-.steamtools-btn:hover {
-  background-color: #0056b3; /* Slightly darker on hover */
-}
-
-/* Responsive Design for Buttons */
+/* Responsive Design for Download Buttons */
 @media (max-width: 768px) {
-  .download-btn,
-  .steamtools-btn,
-  .discord-btn {
+  .download-btn {
     width: 100%; /* Full-width buttons on smaller screens */
     padding: 12px 20px; /* Slightly larger padding for better touch targets */
     font-size: 1rem; /* Adjust font size for readability */
@@ -264,10 +232,57 @@ h1::after {
 }
 
 @media (max-width: 480px) {
-  .download-btn,
-  .steamtools-btn,
-  .discord-btn {
+  .download-btn {
     padding: 10px 15px; /* Smaller padding for very small screens */
     font-size: 0.9rem; /* Smaller font size for very small screens */
   }
+}
+
+/* Admin Panel Styles */
+.game-adder-form {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(34, 34, 34, 0.9); /* Darker black for the form with transparency */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.game-adder-form input {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  border: 1px solid #bb86fc; /* Light purple border */
+  border-radius: 5px;
+  background-color: #333; /* Dark gray background */
+  color: #e0e0e0; /* Soft white text */
+}
+
+.game-adder-form button {
+  padding: 10px 20px;
+  background-color: #6200ee; /* Deep purple background */
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.game-adder-form button:hover {
+  background-color: #bb86fc; /* Light purple on hover */
+}
+
+/* Remove Button */
+.remove-btn {
+  background-color: #ff4444; /* Red color for remove button */
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+  background-color: #cc0000; /* Darker red on hover */
 }
