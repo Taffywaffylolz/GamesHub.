@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +8,7 @@
   <!-- Add FontAwesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
+    /* All your existing CSS styles here */
     body {
       margin: 0;
       padding: 0;
@@ -536,7 +536,7 @@
 
       <!-- Game Files Download Section -->
       <div class="file-list" id="fileList">
-	  
+        <!-- Dynamically added games will appear here -->
       </div>
 
       <!-- Bottom Section -->
@@ -796,7 +796,7 @@
         document.getElementById('gameId').value = '';
         gameFileInput.value = ''; // Clear file input
 
-        // Reload games
+        // Reload games and update the Home tab
         loadGames();
       };
 
